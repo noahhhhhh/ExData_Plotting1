@@ -1,0 +1,145 @@
+2+3
+1+1
+?rnorm
+2+2
+update
+a <- available.packages ()
+a <- available.packages()
+head(rownames(a), 3)
+pwd
+exit
+quit()
+library(httr)
+oauth_endpoints("github")
+myapp <- oauth_app("github", "a54fd789ffbcac60ac08")
+myapp <- oauth_app("github", "a54fd789ffbcac60ac08", "4cb0580b566b530f3090b3dcad16fdf1bb38e03e")
+github_token <- oauth2.0_token(oauth_endpoints("github"), myapp)
+rm(list=ls())
+myapp <- oauth_app("github", "a54fd789ffbcac60ac08", "4cb0580b566b530f3090b3dcad16fdf1bb38e03e")
+github_token <- oauth2.0_token(oauth_endpoints("github"), myapp)
+install.packages("httpuv")
+github_token <- oauth2.0_token(oauth_endpoints("github"), myapp)
+gtoken <- config(token = github_token)
+req <- GET("https://api.github.com/users/jtleek/repos", gtoken)
+content(req)
+json1 = jsonlite::fromJSON(toJSON(content(req)))
+library("josonlite")
+install.packages("jsonlite")
+library(jsonlite)
+json1 = jsonlite::fromJSON(toJSON(content(req)))
+json1
+names(json1)
+dim(json1)
+library(dplyr)
+df <- data.table(json1)
+?dplyr
+library(data.table)
+install("data.table")
+install.packages("data.table")
+library(data.table)
+dt <- data.table(json1)
+dt
+select(json1, html_url, create_at)
+select(json1, html_url, created_at)
+BROWSE("https://api.github.com/users/jtleek/repos",authenticate("Access Token","x-oauth-basic","basic"))
+cat(json1)
+##  load and clean the data, and convert class for the data#
+source("prep.R")#
+#
+##  initiate a 2 by 2 canvas#
+par(mfrow = c(2, 2))#
+#
+##  1. generate a line chart for Global_active_power against datetime#
+plot(data$datetime, data$Global_active_power, type = "l", xlab = "", ylab = "Global Active Power")#
+#
+##  2. generate a line chart for Voltage against datetime#
+plot(data$datetime, data$Voltage, type = "l", xlab = "datetime", ylab = "Voltage")#
+#
+##  3. generate a line chart for Sub_metering_1 against datatime#
+plot(data$datetime, data$Sub_metering_1, type = "l", xlab = "", ylab = "Energy sub metering")#
+##  add a red line for Sub_metering_2 against datatime#
+lines(data$datetime, data$Sub_metering_2, col = "red")#
+##  add a blue line for Sub_metering_3 against datatime#
+lines(data$datetime, data$Sub_metering_3, col = "blue")#
+#
+##  add a legend#
+legend(#
+    "topright"#
+    , legend=c("Sub_metering_1", "Sub_metering_2", "Sub_metering_3")#
+    , col=c("black", "red", "blue")#
+    , lty="solid"#
+)#
+#
+##  4. generate a line chart for lobal_reactive_power against datetime#
+plot(data$datetime, data$Global_reactive_power, type = "l", xlab = "datetime", ylab = "Global_reactive_power")#
+#
+##  export the plot to a png file and turn off the printing device#
+dev.copy(png, file="plot4.png", height=480, width=480)#
+dev.off()
+## set up the working directory#
+setwd("~/R/Working Directory/ExData_Plotting1")#
+#
+##  if the zip file already exists, then unzip directly, if not, download it into the working directory#
+if (!file.exists("household_power_consumption.zip")) #
+{#
+    download.file("https://d396qusza40orc.cloudfront.net/exdata%2Fdata%2Fhousehold_power_consumption.zip", "household_power_consumption.zip", method = "curl")#
+}#
+#
+##  unzip the file, a txt file will be extracted in the working directory#
+unzip("household_power_consumption.zip")#
+#
+##  load the txt file#
+dataHPC <- read.csv2("household_power_consumption.txt")#
+#
+##  delete the txt file and the zip file#
+file.remove(c("household_power_consumption.txt", "household_power_consumption.zip"))#
+#
+##  transform the date to Date class, for subsetting purpose#
+dataHPC$Date <- strptime(dataHPC$Date, '%d/%m/%Y')#
+#
+##  subset the original dataset by choosing only the rows from 2007-02-01 to 2007-02-02#
+dataHPCSub <- dataHPC[dataHPC$Date >= "2007-02-01" & dataHPC$Date <= "2007-02-02",]#
+##  release the original data memory#
+rm(dataHPC)#
+#
+##  combine the Date and Time column#
+datetime <- paste(dataHPCSub$Date, dataHPCSub$Time, sep = " ")#
+##  convert the combined var to Date time class#
+datetime <- strptime(datetime, '%Y-%m-%d %H:%M:%S')#
+##  insert the new datetime column#
+data <- cbind(datetime, dataHPCSub)#
+##  release the original var and dateset#
+rm(dataHPCSub, datetime)#
+#
+##  convert the non-date/time columns to numeric class#
+data[, -c(1,2,3)] <- apply(data[, -c(1,2,3)], 2, function(x) as.numeric(as.character(x)))
+##  initiate a 2 by 2 canvas#
+par(mfrow = c(2, 2))#
+#
+##  1. generate a line chart for Global_active_power against datetime#
+plot(data$datetime, data$Global_active_power, type = "l", xlab = "", ylab = "Global Active Power")#
+#
+##  2. generate a line chart for Voltage against datetime#
+plot(data$datetime, data$Voltage, type = "l", xlab = "datetime", ylab = "Voltage")#
+#
+##  3. generate a line chart for Sub_metering_1 against datatime#
+plot(data$datetime, data$Sub_metering_1, type = "l", xlab = "", ylab = "Energy sub metering")#
+##  add a red line for Sub_metering_2 against datatime#
+lines(data$datetime, data$Sub_metering_2, col = "red")#
+##  add a blue line for Sub_metering_3 against datatime#
+lines(data$datetime, data$Sub_metering_3, col = "blue")#
+#
+##  add a legend#
+legend(#
+    "topright"#
+    , legend=c("Sub_metering_1", "Sub_metering_2", "Sub_metering_3")#
+    , col=c("black", "red", "blue")#
+    , lty="solid"#
+)#
+#
+##  4. generate a line chart for lobal_reactive_power against datetime#
+plot(data$datetime, data$Global_reactive_power, type = "l", xlab = "datetime", ylab = "Global_reactive_power")#
+#
+##  export the plot to a png file and turn off the printing device#
+dev.copy(png, file="plot4.png", height=480, width=480)#
+dev.off()
