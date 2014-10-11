@@ -4,6 +4,9 @@ setwd("~/R/Working Directory/ExData_Plotting1")
 ##  load and clean the data, and convert class for the data
 source("prep.R")
 
+##  set up the canvas
+par(bg = "white", mfrow = c(1, 1))
+
 ##  generate a histogram for Global_active_power
 hist(data$Global_active_power, col = "red", main = "Global Active Power", xlab = "Global Active Power (kilowatts)")
 

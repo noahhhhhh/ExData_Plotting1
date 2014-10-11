@@ -4,8 +4,8 @@ setwd("~/R/Working Directory/ExData_Plotting1")
 ##  load and clean the data, and convert class for the data
 source("prep.R")
 
-##  initiate a 2 by 2 canvas
-par(mfrow = c(2, 2))
+##  set up the canvas
+par(bg = "white", mfrow = c(2, 2))
 
 ##  1. generate a line chart for Global_active_power against datetime
 plot(data$datetime, data$Global_active_power, type = "l", xlab = "", ylab = "Global Active Power")

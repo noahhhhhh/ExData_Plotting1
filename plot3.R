@@ -4,6 +4,9 @@ setwd("~/R/Working Directory/ExData_Plotting1")
 ##  load and clean the data, and convert class for the data
 source("prep.R")
 
+##  set up the canvas
+par(bg = "white", mfrow = c(1, 1))
+
 ##  generate a line chart for Sub_metering_1 against datatime
 plot(data$datetime, data$Sub_metering_1, type = "l", xlab = "", ylab = "Energy sub metering")
 ##  add a red line for Sub_metering_2 against datatime

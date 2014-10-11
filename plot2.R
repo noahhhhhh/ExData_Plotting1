@@ -4,6 +4,9 @@ setwd("~/R/Working Directory/ExData_Plotting1")
 ##  load and clean the data, and convert class for the data
 source("prep.R")
 
+##  set up the canvas
+par(bg = "white", mfrow = c(1, 1))
+
 ##  generate a line chart for Global_active_power against datetime
 plot(data$datetime, data$Global_active_power, type = "l", xlab = "", ylab = "Global Active Power (kilowatts)")
 
